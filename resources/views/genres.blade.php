@@ -36,10 +36,10 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($genres as $item )
+            @foreach ($genres as $genre )
                 <tr>
-                    <td>{{ $item['name'] }}</td>
-                    <td>{{ $item['description'] }}</td>
+                    <td>{{ $genre['name'] }}</td>
+                    <td>{{ $genre['description'] }}</td>
                 </tr>
             
             @endforeach

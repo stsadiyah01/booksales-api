@@ -37,11 +37,11 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($authors as $item )
+            @foreach ($authors as $author )
                 <tr>
-                    <td>{{ $item['name'] }}</td>
-                    <td>{{ $item['photo'] }}</td>
-                    <td>{{ $item['bio'] }}</td>
+                    <td>{{ $author['name'] }}</td>
+                    <td>{{ $author['photo'] }}</td>
+                    <td>{{ $author['bio'] }}</td>
                 </tr>
             @endforeach
         </tbody>

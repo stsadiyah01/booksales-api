@@ -41,15 +41,15 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($books as $item )
+            @foreach ($books as $book )
                 <tr>
-                    <td>{{ $item['title'] }}</td>
-                    <td>{{ $item['description'] }}</td>
-                    <td>{{ $item['price'] }}</td>
-                    <td>{{ $item['stok'] }}</td>
-                    <td>{{ $item['cover_photo'] }}</td>
-                    <td>{{ $item['genre_id'] }}</td>
-                    <td>{{ $item['author_id'] }}</td>
+                    <td>{{ $book['title'] }}</td>
+                    <td>{{ $book['description'] }}</td>
+                    <td>{{ $book['price'] }}</td>
+                    <td>{{ $book['stok'] }}</td>
+                    <td>{{ $book['cover_photo'] }}</td>
+                    <td>{{ $book['genre_id'] }}</td>
+                    <td>{{ $book['author_id'] }}</td>
                 </tr>
             
             @endforeach
