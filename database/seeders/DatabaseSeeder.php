@@ -9,6 +9,7 @@ use Database\Seeders\GenreSeeder;
 use Database\Seeders\AuthorSeeder;
 use Database\Seeders\BookSeeder;
 use Database\Seeders\UserSeeder;
+use Database\Seeders\TransactionSeeder;
 
 
 class DatabaseSeeder extends Seeder
@@ -22,7 +23,8 @@ class DatabaseSeeder extends Seeder
             GenreSeeder::class,
             AuthorSeeder::class,
             BookSeeder::class,
-            UserSeeder::class
+            UserSeeder::class,
+            TransactionSeeder::class
         ]);
         
 
