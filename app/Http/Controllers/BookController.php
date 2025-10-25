@@ -11,21 +11,21 @@ class BookController extends Controller
 {
     // Mengambil atau melihat semua data
     public function index(){
-        $books= Book::all();
+        $book= Book::with('genre','author')->get();
 
-        if($books->isEmpty()){
+        if($book->isEmpty()){
             return response()->json([
                 "succes"=>true,
                 "message"=> "Resource data not found"
             ],200);
         }
-        
+
         return response()->json([
             "succes"=> true,
             "message"=>"Get all resources",
-            "data"=> $books
+            "data"=> $book
         ],200);
-        
+
     }
 
     // Menambahkan data
@@ -35,7 +35,7 @@ class BookController extends Controller
             'title' => 'required|string|max:100',
             'description' => 'required|string',
             'price' => 'required|numeric',
-            'stok' => 'required|integer',
+            'stock' => 'required|integer',
             'cover_photo' => 'required|image|mimes:jpeg,jpg,png|max:5048',
             'genre_id' => 'required|exists:genres,id',
             'author_id' => 'required|exists:authors,id',
@@ -60,7 +60,7 @@ class BookController extends Controller
             'title'=> $request->title,
             'description'=> $request->description,
             'price'=> $request->price,
-            'stok'=> $request->stok,
+            'stock'=> $request->stock,
             'cover_photo'=> $image->hashName(),
             'genre_id'=>$request->genre_id,
             'author_id'=>$request->author_id
@@ -74,11 +74,11 @@ class BookController extends Controller
             'message'=> 'Resource added succesfully',
             'data'=> $book
         ],201);
-    }  
-    
+    }
+
     // Menampilkan satu data
     public function show(string $id){
-        $book=Book::find($id);
+        $book= Book::with('genre','author')->find($id);
 
         if(!$book){
             return response()->json([
@@ -111,7 +111,7 @@ class BookController extends Controller
             'title' => 'required|string|max:100',
             'description' => 'required|string',
             'price' => 'required|numeric',
-            'stok' => 'required|integer',
+            'stock' => 'required|integer',
             'cover_photo' => 'nullable|image|mimes:jpeg,jpg,png|max:5048',
             'genre_id' => 'required|exists:genres,id',
             'author_id' => 'required|exists:authors,id',
@@ -122,7 +122,7 @@ class BookController extends Controller
                 "success"=>false,
                 "message"=> $validator->errors(),
             ],422);
-    
+
         }
 
         // 3. Siapkan data yang ingin di update
@@ -130,7 +130,7 @@ class BookController extends Controller
             'title'=> $request->title,
             'description'=> $request->description,
             'price'=> $request->price,
-            'stok'=> $request->stok,
+            'stock'=> $request->stock,
             'genre_id'=>$request->genre_id,
             'author_id'=>$request->author_id
 
@@ -140,7 +140,7 @@ class BookController extends Controller
         if($request->hasFile('cover_photo')){
             $image = $request->file('cover_photo');
             $image->store('books','public');
-       
+
 
             if ($book->cover_photo){
                 Storage::disk('public')->delete('books/' . $book->cover_photo);

@@ -22,35 +22,36 @@ Route::apiResource('/books',BookController::class)->only(['index','show']);
 // Harus Login dulu
 Route::middleware(['auth:api'])->group(function () {
 
-    // Genre
-    Route::apiResource('/genres',GenreController::class)->only(['index','show']);
 
-    // Author
-    Route::apiResource('/authors',AuthorController::class)->only(['index','show']);
 
     // Transaksi
     Route::apiResource('/transactions',TransactionController::class)->only(['show','store','update']);
 
-    
+
     Route::middleware(['role:admin'])->group(function () {
 
         // Transaksi
             Route::apiResource('/transactions',TransactionController::class)->only(['index','destroy']);
 
-        // Buku
-            Route::apiResource('/books',BookController::class)->only(['store','update','destroy']);
 
-        // Genre
-            Route::apiResource('/genres',GenreController::class)->only(['store','update','destroy']);
-
-        // Author
-            Route::apiResource('/authors',AuthorController::class)->only(['store','update','destroy']);
     });
-    
+
 });
 
+// Buku
+     Route::apiResource('/books',BookController::class)->only(['store','update','destroy']);
 
+ // Genre
+    Route::apiResource('/genres',GenreController::class)->only(['index','show']);
 
+// Author
+    Route::apiResource('/authors',AuthorController::class)->only(['index','show']);
+
+// Genre
+    Route::apiResource('/genres',GenreController::class)->only(['store','update','destroy']);
+
+ // Author
+    Route::apiResource('/authors',AuthorController::class)->only(['store','update','destroy']);
 
 
 // Route::get('/books', [BookController::class, 'index']);
